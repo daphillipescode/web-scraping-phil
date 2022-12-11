@@ -1,0 +1,7 @@
+.cover {
+    object-fit: cover !important;
+}
+
+.float-right {
+    float: right !important;
+}

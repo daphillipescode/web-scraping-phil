@@ -1,0 +1,117 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            {% for row in images %}
+                {% if forloop.first %}
+                    <img src="{{ row.image }}" class="w-100 cover" height="500px">
+                {% endif %}
+            {% endfor %}
+            <br><br>
+            <div class="row">
+            {% for row in images %}
+                {% if forloop.first %}
+                {% else %}
+                    <div class="col-lg-6">
+                        <img src="{{ row.image }}" class="w-100 cover mb-7" height="200px">
+                    </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <h1 style="font-size: 40px;"><strong>{{ data.price }}</strong></h1>
+            <p>{{ data.title|upper }}</p>
+            <span class="label label-xl font-weight-boldest label-primary label-inline">{{ data.status }}</span>
+            <br><br>
+            {% if data.phone %}
+            <button type="button" class="btn btn-danger btn-block btn-lg" target="_blank">
+                <i class="fas fa-phone"></i> {{ data.phone }}
+            </button>
+            {% endif %}
+            <a href="{{ data.url.url }}" class="btn btn-outline-danger btn-block btn-lg" target="_blank">
+                <i class="fas fa-link"></i> Original Listing
+            </a>
+            <br>
+            <ul class="nav nav-tabs nav-tabs-line">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#overview">
+                        <strong>Overview</strong>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content mt-5" id="myTabContent">
+                <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>
+                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo5\dist/../src/media/svg/icons\Home\Building.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <path d="M13.5,21 L13.5,18 C13.5,17.4477153 13.0522847,17 12.5,17 L11.5,17 C10.9477153,17 10.5,17.4477153 10.5,18 L10.5,21 L5,21 L5,4 C5,2.8954305 5.8954305,2 7,2 L17,2 C18.1045695,2 19,2.8954305 19,4 L19,21 L13.5,21 Z M9,4 C8.44771525,4 8,4.44771525 8,5 L8,6 C8,6.55228475 8.44771525,7 9,7 L10,7 C10.5522847,7 11,6.55228475 11,6 L11,5 C11,4.44771525 10.5522847,4 10,4 L9,4 Z M14,4 C13.4477153,4 13,4.44771525 13,5 L13,6 C13,6.55228475 13.4477153,7 14,7 L15,7 C15.5522847,7 16,6.55228475 16,6 L16,5 C16,4.44771525 15.5522847,4 15,4 L14,4 Z M9,8 C8.44771525,8 8,8.44771525 8,9 L8,10 C8,10.5522847 8.44771525,11 9,11 L10,11 C10.5522847,11 11,10.5522847 11,10 L11,9 C11,8.44771525 10.5522847,8 10,8 L9,8 Z M9,12 C8.44771525,12 8,12.4477153 8,13 L8,14 C8,14.5522847 8.44771525,15 9,15 L10,15 C10.5522847,15 11,14.5522847 11,14 L11,13 C11,12.4477153 10.5522847,12 10,12 L9,12 Z M14,12 C13.4477153,12 13,12.4477153 13,13 L13,14 C13,14.5522847 13.4477153,15 14,15 L15,15 C15.5522847,15 16,14.5522847 16,14 L16,13 C16,12.4477153 15.5522847,12 15,12 L14,12 Z" fill="#000000"/>
+                                        <rect fill="#FFFFFF" x="13" y="8" width="3" height="3" rx="1"/>
+                                        <path d="M4,21 L20,21 C20.5522847,21 21,21.4477153 21,22 L21,22.4 C21,22.7313708 20.7313708,23 20.4,23 L3.6,23 C3.26862915,23 3,22.7313708 3,22.4 L3,22 C3,21.4477153 3.44771525,21 4,21 Z" fill="#000000" opacity="0.3"/>
+                                    </g>
+                                </svg><!--end::Svg Icon--></span>&emsp;
+                                {{ data.style }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo5\dist/../src/media/svg/icons\Home\Bed.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <path d="M4,22 L2,22 C2,19.2385763 4.23857625,18 7,18 L17,18 C19.7614237,18 22,19.2385763 22,22 L20,22 C20,20.3431458 18.6568542,20 17,20 L7,20 C5.34314575,20 4,20.3431458 4,22 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                        <rect fill="#000000" x="1" y="14" width="22" height="6" rx="1"/>
+                                        <path d="M13,13 L11,13 L11,12 C11,11.4477153 10.5522847,11 10,11 L6,11 C5.44771525,11 5,11.4477153 5,12 L5,13 L4,13 C3.44771525,13 3,12.5522847 3,12 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,12 C21,12.5522847 20.5522847,13 20,13 L19,13 L19,12 C19,11.4477153 18.5522847,11 18,11 L14,11 C13.4477153,11 13,11.4477153 13,12 L13,13 Z" fill="#000000" opacity="0.3"/>
+                                    </g>
+                                </svg><!--end::Svg Icon--></span>&emsp;
+                                {{ data.beds }} Beds
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo5\dist/../src/media/svg/icons\Home\Bath.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <path d="M6,10 C6,10.5522847 5.55228475,11 5,11 C4.44771525,11 4,10.5522847 4,10 L4,6 C4,4.34314575 5.34314575,3 7,3 C8.65685425,3 10,4.34314575 10,6 C10,6.55228475 9.55228475,7 9,7 C8.44771525,7 8,6.55228475 8,6 C8,5.44771525 7.55228475,5 7,5 C6.44771525,5 6,5.44771525 6,6 L6,10 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                        <path d="M6,20 L4,20 C4,17.2385763 6.23857625,16 9,16 L15,16 C17.7614237,16 20,17.2385763 20,20 L18,20 C18,18.3431458 16.6568542,18 15,18 L9,18 C7.34314575,18 6,18.3431458 6,20 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                        <path d="M2,9 L23,9 L22.4942047,13.5521576 C22.2128532,16.084321 20.0725321,18 17.524786,18 L7.47521397,18 C4.92746788,18 2.78714678,16.084321 2.50579529,13.5521576 L2,9 Z M19.25,11.5 C19.25,12.9305987 18.694479,14.0416408 17.55,14.9 C17.2186292,15.1485281 17.1514719,15.6186292 17.4,15.95 C17.6485281,16.2813708 18.1186292,16.3485281 18.45,16.1 C19.9721877,14.9583592 20.75,13.4027346 20.75,11.5 C20.75,11.0857864 20.4142136,10.75 20,10.75 C19.5857864,10.75 19.25,11.0857864 19.25,11.5 Z" fill="#000000"/>
+                                    </g>
+                                </svg><!--end::Svg Icon--></span>&emsp;
+                                {{ data.baths }} Baths
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo5\dist/../src/media/svg/icons\Layout\Layout-top-panel-3.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <path d="M3,4 L20,4 C20.5522847,4 21,4.44771525 21,5 L21,7 C21,7.55228475 20.5522847,8 20,8 L3,8 C2.44771525,8 2,7.55228475 2,7 L2,5 C2,4.44771525 2.44771525,4 3,4 Z M3,10 L13,10 C13.5522847,10 14,10.4477153 14,11 L14,19 C14,19.5522847 13.5522847,20 13,20 L3,20 C2.44771525,20 2,19.5522847 2,19 L2,11 C2,10.4477153 2.44771525,10 3,10 Z" fill="#000000"/>
+                                        <rect fill="#000000" opacity="0.3" x="16" y="10" width="5" height="10" rx="1"/>
+                                    </g>
+                                </svg><!--end::Svg Icon--></span>&emsp;
+                                {{ data.sqft }} Sqft
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo5\dist/../src/media/svg/icons\Home\Home.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <path d="M3.95709826,8.41510662 L11.47855,3.81866389 C11.7986624,3.62303967 12.2013376,3.62303967 12.52145,3.81866389 L20.0429,8.41510557 C20.6374094,8.77841684 21,9.42493654 21,10.1216692 L21,19.0000642 C21,20.1046337 20.1045695,21.0000642 19,21.0000642 L4.99998155,21.0000673 C3.89541205,21.0000673 2.99998155,20.1046368 2.99998155,19.0000673 L2.99999828,10.1216672 C2.99999935,9.42493561 3.36258984,8.77841732 3.95709826,8.41510662 Z M10,13 C9.44771525,13 9,13.4477153 9,14 L9,17 C9,17.5522847 9.44771525,18 10,18 L14,18 C14.5522847,18 15,17.5522847 15,17 L15,14 C15,13.4477153 14.5522847,13 14,13 L10,13 Z" fill="#000000"/>
+                                    </g>
+                                </svg><!--end::Svg Icon--></span>&emsp;
+                                {{ data.property_type }}
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <p>MLS#: {{ data.mls_number }}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

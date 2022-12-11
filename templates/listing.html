@@ -1,0 +1,159 @@
+{% extends 'layout.html' %}
+{% load tags %}
+{% load mathfilters %}
+{% block content %}
+<div class="container">
+    <div class="d-flex align-items-center flex-wrap mr-1">
+        <div class="d-flex align-items-baseline mr-5">
+            <h2 class="subheader-title text-dark font-weight-bold my-2 mr-3">All Listing</h2>
+            <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'home' %}" class="text-muted">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="javascript:void(0);" class="text-muted">All Listing</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-lg-9">
+            <p class="float-left">Showing {{ data.paginator.count }} results</p>
+            <div class="float-right" style="margin-top: -20px;">
+                {% if data.has_other_pages %}
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <div class="d-flex flex-wrap py-2 mr-3">
+                            {% if data.has_previous %}
+                                <a href="?page={{ data.previous_page_number }}" class="btn btn-icon btn-sm btn-light mr-2 my-1"><i class="ki ki-bold-arrow-back icon-xs"></i></a>
+                            {% else %}
+                                <a href="javascript:void(0);" class="btn btn-icon btn-sm btn-light mr-2 my-1 disabled"><i class="ki ki-bold-arrow-back icon-xs"></i></a>
+                            {% endif %}
+                            {% for row in data.paginator.page_range %}
+                                {% if data.number == row %}
+                                    <a href="javascript:void(0);" class="btn btn-icon btn-sm border-0 btn-light btn-hover-primary active mr-2 my-1">{{ row }}</a>
+                                {% elif row > data.number|add:-3 and row < data.number|add:3 %}
+                                    <a href="?page={{ row }}" class="btn btn-icon btn-sm border-0 btn-light mr-2 my-1">{{ row }}</a>
+                                {% endif %}
+                            {% endfor %}
+                            {% if data.has_next %}
+                                <a href="?page={{ data.next_page_number }}" class="btn btn-icon btn-sm btn-light mr-2 my-1"><i class="ki ki-bold-arrow-next icon-xs"></i></a>
+                            {% else %}
+                                <a href="javascript:void(0);" class="btn btn-icon btn-sm btn-light mr-2 my-1 disabled"><i class="ki ki-bold-arrow-next icon-xs"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for row in data %}
+        <div class="col-lg-9">
+            <div class="card mb-3">
+                <div class="card-header border-bottom-0 card-header-right ribbon ribbon-left">
+                    <div class="ribbon-target bg-primary" style="top: 10px; left: -2px;">{{ row.status }}</div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            {% get_result_images row.id as images %}
+                            <div id="carousel-images-{{ row.id }}" class="carousel carousel-custom slide" data-ride="carousel">
+                                <div class="carousel-inner overlay">
+                                    {% for image in images %}
+                                    {% if forloop.first %}
+                                    <div class="carousel-item active" data-bs-interval="2000">
+                                        <center>
+                                            <div class="overlay-wrapper">
+                                                <img src="{{ image.image }}" class="d-block cover" height="150px">
+                                            </div>
+                                            <div class="overlay-layer align-items-end justify-content-center">
+                                                <div class="d-flex flex-grow-1 flex-center bg-white-o-5 py-5">
+                                                    <a href="{% url 'view_listing' row.id %}" class="btn font-weight-bold btn-sm btn-light-primary btn-shadow ml-2">View more</a>&nbsp;
+                                                    <button type="button" class="btn btn-secondary btn-sm">
+                                                        <i class="fas fa-camera"></i>
+                                                        {{ images.count }}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </center>
+                                    </div>
+                                    {% else %}
+                                    <div class="carousel-item" data-bs-interval="2000">
+                                        <center>
+                                            <div class="overlay-wrapper">
+                                                <img src="{{ image.image }}" class="d-block cover" height="150px">
+                                            </div>
+                                            <div class="overlay-layer align-items-end justify-content-center">
+                                                <div class="d-flex flex-grow-1 flex-center bg-white-o-5 py-5">
+                                                    <a href="{% url 'view_listing' row.id %}" class="btn font-weight-bold btn-sm btn-light-primary btn-shadow ml-2">View more</a>&nbsp;
+                                                    <button type="button" class="btn btn-secondary btn-sm">
+                                                        <i class="fas fa-camera"></i>
+                                                        {{ images.count }}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </center>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h6>{{ row.title|title }}</h6>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td class="border-top-0">
+                                        <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo5\dist/../src/media/svg/icons\Home\Bed.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M4,22 L2,22 C2,19.2385763 4.23857625,18 7,18 L17,18 C19.7614237,18 22,19.2385763 22,22 L20,22 C20,20.3431458 18.6568542,20 17,20 L7,20 C5.34314575,20 4,20.3431458 4,22 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                                <rect fill="#000000" x="1" y="14" width="22" height="6" rx="1"/>
+                                                <path d="M13,13 L11,13 L11,12 C11,11.4477153 10.5522847,11 10,11 L6,11 C5.44771525,11 5,11.4477153 5,12 L5,13 L4,13 C3.44771525,13 3,12.5522847 3,12 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,12 C21,12.5522847 20.5522847,13 20,13 L19,13 L19,12 C19,11.4477153 18.5522847,11 18,11 L14,11 C13.4477153,11 13,11.4477153 13,12 L13,13 Z" fill="#000000" opacity="0.3"/>
+                                            </g>
+                                        </svg><!--end::Svg Icon--></span>
+                                        {{ row.beds }} Beds
+                                    </td>
+                                    <td class="border-top-0">
+                                        <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo5\dist/../src/media/svg/icons\Home\Bath.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <path d="M6,10 C6,10.5522847 5.55228475,11 5,11 C4.44771525,11 4,10.5522847 4,10 L4,6 C4,4.34314575 5.34314575,3 7,3 C8.65685425,3 10,4.34314575 10,6 C10,6.55228475 9.55228475,7 9,7 C8.44771525,7 8,6.55228475 8,6 C8,5.44771525 7.55228475,5 7,5 C6.44771525,5 6,5.44771525 6,6 L6,10 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                                <path d="M6,20 L4,20 C4,17.2385763 6.23857625,16 9,16 L15,16 C17.7614237,16 20,17.2385763 20,20 L18,20 C18,18.3431458 16.6568542,18 15,18 L9,18 C7.34314575,18 6,18.3431458 6,20 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                                <path d="M2,9 L23,9 L22.4942047,13.5521576 C22.2128532,16.084321 20.0725321,18 17.524786,18 L7.47521397,18 C4.92746788,18 2.78714678,16.084321 2.50579529,13.5521576 L2,9 Z M19.25,11.5 C19.25,12.9305987 18.694479,14.0416408 17.55,14.9 C17.2186292,15.1485281 17.1514719,15.6186292 17.4,15.95 C17.6485281,16.2813708 18.1186292,16.3485281 18.45,16.1 C19.9721877,14.9583592 20.75,13.4027346 20.75,11.5 C20.75,11.0857864 20.4142136,10.75 20,10.75 C19.5857864,10.75 19.25,11.0857864 19.25,11.5 Z" fill="#000000"/>
+                                            </g>
+                                        </svg><!--end::Svg Icon--></span>
+                                        {{ row.baths }} Baths
+                                    </td>
+                                    <td class="border-top-0">
+                                        <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo5\dist/../src/media/svg/icons\Layout\Layout-top-panel-3.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M3,4 L20,4 C20.5522847,4 21,4.44771525 21,5 L21,7 C21,7.55228475 20.5522847,8 20,8 L3,8 C2.44771525,8 2,7.55228475 2,7 L2,5 C2,4.44771525 2.44771525,4 3,4 Z M3,10 L13,10 C13.5522847,10 14,10.4477153 14,11 L14,19 C14,19.5522847 13.5522847,20 13,20 L3,20 C2.44771525,20 2,19.5522847 2,19 L2,11 C2,10.4477153 2.44771525,10 3,10 Z" fill="#000000"/>
+                                                <rect fill="#000000" opacity="0.3" x="16" y="10" width="5" height="10" rx="1"/>
+                                            </g>
+                                        </svg><!--end::Svg Icon--></span>
+                                        {{ row.sqft }} Sqft
+                                    </td>
+                                    <td class="border-top-0">
+                                        <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo5\dist/../src/media/svg/icons\Home\Home.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M3.95709826,8.41510662 L11.47855,3.81866389 C11.7986624,3.62303967 12.2013376,3.62303967 12.52145,3.81866389 L20.0429,8.41510557 C20.6374094,8.77841684 21,9.42493654 21,10.1216692 L21,19.0000642 C21,20.1046337 20.1045695,21.0000642 19,21.0000642 L4.99998155,21.0000673 C3.89541205,21.0000673 2.99998155,20.1046368 2.99998155,19.0000673 L2.99999828,10.1216672 C2.99999935,9.42493561 3.36258984,8.77841732 3.95709826,8.41510662 Z M10,13 C9.44771525,13 9,13.4477153 9,14 L9,17 C9,17.5522847 9.44771525,18 10,18 L14,18 C14.5522847,18 15,17.5522847 15,17 L15,14 C15,13.4477153 14.5522847,13 14,13 L10,13 Z" fill="#000000"/>
+                                            </g>
+                                        </svg><!--end::Svg Icon--></span>
+                                        {{ row.type }}
+                                    </td>
+                                </tr>
+                            </table>
+                            <h3 class="float-right"><strong>{{ row.price }}</strong></h3><br><br>
+                            <a href="{% url 'view_listing' row.id %}" class="btn btn-primary float-right">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

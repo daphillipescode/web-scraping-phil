@@ -83,7 +83,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'GoingGlobal1229$tulum',
-        'HOST': 'GoingGlobal1229.mysql.pythonanywhere-services.com',
+        'HOST': 'localhost',
         'USER': 'GoingGlobal1229',
         'PASSWORD': 'tulum2022',
         'PORT': '3306'

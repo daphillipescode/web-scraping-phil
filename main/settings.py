@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tulum',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': '',
+        'NAME': 'GoingGlobal1229$tulum',
+        'HOST': 'GoingGlobal1229.mysql.pythonanywhere-services.com',
+        'USER': 'GoingGlobal1229',
+        'PASSWORD': 'tulum2022',
         'PORT': '3306'
     },
 }

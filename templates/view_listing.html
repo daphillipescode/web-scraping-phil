@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load tags %}
 {% block content %}
 <div class="container">
     <div class="row">
@@ -108,6 +109,12 @@
                     </table>
                     <br>
                     <p>MLS#: {{ data.mls_number }}</p>
+                    <br>
+                    {% if data.description %}
+                    <p>Description</p>
+                    {% update_description data.id data.description as formatted_description %}
+                    <p class="text-justify">{{ formatted_description|safe }}</p>
+                    {% endif %}
                 </div>
             </div>
 

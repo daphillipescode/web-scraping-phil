@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
@@ -13,7 +14,7 @@ def home(request):
     page = request.GET.get('page', 1)
     try:
         context = {
-            'data': Paginator(Results.objects.order_by('title'), 15).page(page)
+            'data': Paginator(Results.objects.filter(~Q(description=None)).order_by('title'), 15).page(page)
         }
         return render(request, 'listing.html', context)
     except Exception as e:
@@ -21,7 +22,7 @@ def home(request):
 
 
 def view_listing(request, pk):
-    results = Results.objects.filter(id=pk).first()
+    results = Results.objects.filter(Q(id=pk) & ~Q(description=None)).first()
     context = {
         'data': results,
         'images': ResultsImages.objects.filter(result_id=results.id)
@@ -106,7 +107,8 @@ def process_urls(request):
             webpage = urlopen(req).read()
             soup = BeautifulSoup(webpage, 'lxml')
             title = soup.find('h3', class_='section-title').text if soup.find('h3', class_='section-title') else None
-            description = None # temporary desscription
+            description = soup.find('div', class_='description-text').text.strip().replace('\r', '') if soup.find('div', class_='description-text') else None
+
             status = soup.find('h2', class_='property-type').text.strip() if soup.find('h2', class_='property-type') else None
 
             price = soup.find('div', class_='price').span.text.replace('\n', '').replace(' ', '') if soup.find(
@@ -172,7 +174,7 @@ def process_urls(request):
                                 )
                                 total_image += 1
 
-            print(row.id, status)
+            print(row.id, status, description)
 
             title = None
             description = None

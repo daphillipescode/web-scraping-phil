@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Tulum Real State | Login</title>
+        <meta name="description" content="Login page example" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <!--begin::Fonts-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+        <!--end::Fonts-->
+        <!--begin::Page Custom Styles(used by this page)-->
+        <link href="{% static 'css/pages/login/classic/login-2.css' %}" rel="stylesheet" type="text/css" />
+        <!--end::Page Custom Styles-->
+        <!--begin::Global Theme Styles(used by all pages)-->
+        <link href="{% static 'plugins/global/plugins.bundle.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'plugins/custom/prismjs/prismjs.bundle.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'css/style.bundle.css' %}" rel="stylesheet" type="text/css" />
+        <!--end::Global Theme Styles-->
+        <!--begin::Layout Themes(used by all pages)-->
+        <!--end::Layout Themes-->
+        <link rel="shortcut icon" href="{% static 'img/tulum-ico.ico' %}" />
+    </head>
+    <!--end::Head-->
+    <!--begin::Body-->
+    <body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-static page-loading">
+        <!--begin::Main-->
+        <div class="d-flex flex-column flex-root">
+            <!--begin::Login-->
+            <div class="login login-2 login-signin-on d-flex flex-row-fluid" id="kt_login">
+                <div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat" style="background-image: url({% static 'media/bg/bg-3.jpg' %});">
+                    <div class="login-form text-center p-7 position-relative overflow-hidden">
+                        <!--begin::Login Header-->
+                        <div class="d-flex flex-center mb-15">
+                            <a href="#">
+                                <img src="{% static 'img/tulum.png' %}" class="max-h-75px" alt="" />
+                            </a>
+                        </div>
+                        <!--end::Login Header-->
+                        <!--begin::Login Sign in form-->
+                        <div class="login-signin">
+                            <div class="mb-20">
+                                <h3>Welcome to <strong>Tulum Real State</strong></h3>
+                                <div class="text-muted font-weight-bold">Enter your details to login to your account:</div>
+                            </div>
+                            <form class="form" id="loginForm">
+                                {% csrf_token %}
+                                <div id="alertDiv"></div>
+                                <div class="form-group mb-5">
+                                    <input class="form-control h-auto form-control-solid py-4 px-8" type="text" placeholder="Username" name="username" autocomplete="off" />
+                                </div>
+                                <div class="form-group mb-5">
+                                    <input class="form-control h-auto form-control-solid py-4 px-8" type="password" placeholder="Password" name="password" />
+                                </div>
+                                <br>
+                                <button type="submit" id="submitBtn" class="btn btn-block btn-primary font-weight-bold px-9 py-4">Sign In</button>
+                            </form>
+                            <div class="mt-10">
+                                <span class="opacity-70 mr-4">Don't have an account yet?</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Login-->
+        </div>
+        <!--end::Main-->
+        <script>
+            var HOST_URL = "https://keenthemes.com/metronic/tools/preview";
+        </script>
+        <!--begin::Global Config(global config for global JS scripts)-->
+        <script>
+            var KTAppSettings = {
+                "breakpoints": {
+                    "sm": 576,
+                    "md": 768,
+                    "lg": 992,
+                    "xl": 1200,
+                    "xxl": 1200
+                },
+                "colors": {
+                    "theme": {
+                        "base": {
+                            "white": "#ffffff",
+                            "primary": "#6993FF",
+                            "secondary": "#E5EAEE",
+                            "success": "#1BC5BD",
+                            "info": "#8950FC",
+                            "warning": "#FFA800",
+                            "danger": "#F64E60",
+                            "light": "#F3F6F9",
+                            "dark": "#212121"
+                        },
+                        "light": {
+                            "white": "#ffffff",
+                            "primary": "#E1E9FF",
+                            "secondary": "#ECF0F3",
+                            "success": "#C9F7F5",
+                            "info": "#EEE5FF",
+                            "warning": "#FFF4DE",
+                            "danger": "#FFE2E5",
+                            "light": "#F3F6F9",
+                            "dark": "#D6D6E0"
+                        },
+                        "inverse": {
+                            "white": "#ffffff",
+                            "primary": "#ffffff",
+                            "secondary": "#212121",
+                            "success": "#ffffff",
+                            "info": "#ffffff",
+                            "warning": "#ffffff",
+                            "danger": "#ffffff",
+                            "light": "#464E5F",
+                            "dark": "#ffffff"
+                        }
+                    },
+                    "gray": {
+                        "gray-100": "#F3F6F9",
+                        "gray-200": "#ECF0F3",
+                        "gray-300": "#E5EAEE",
+                        "gray-400": "#D6D6E0",
+                        "gray-500": "#B5B5C3",
+                        "gray-600": "#80808F",
+                        "gray-700": "#464E5F",
+                        "gray-800": "#1B283F",
+                        "gray-900": "#212121"
+                    }
+                },
+                "font-family": "Poppins"
+            };
+        </script>
+        <script src="{% static 'plugins/global/plugins.bundle.js' %}"></script>
+        <script src="{% static 'plugins/custom/prismjs/prismjs.bundle.js' %}"></script>
+        <script src="{% static 'js/scripts.bundle.js' %}"></script>
+        <script src="{% static 'js/pages/custom/login/login.js' %}"></script>
+        <script>
+            $("#loginForm").on("submit", function (e) {
+                var form = new FormData(this);
+                $.ajax({
+                    data: form,
+                    url: '{% url "sign_in" %}',
+                    type: "POST",
+                    beforeSend: function () {
+                        $('#submitBtn').addClass('cursor-not-allowed');
+                        $("#submitBtn").html(`<div class="spinner-border" role="status"></div>`);
+                    },
+                    success: function (response) {
+                        if (response.data) {
+                            $('#submitBtn').addClass('cursor-not-allowed');
+                            $("#submitBtn").html(`<div class="spinner-border" role="status"></div>`);
+                            var nexturl = "{% if request.GET.next %}{{ request.GET.next }}{% else %}{% url 'home' %}{% endif %}";
+
+                            if(nexturl.startsWith('http')) {
+                                nexturl = "{% url 'home' %}";
+                            }
+
+                            window.location.href = nexturl;
+                        } else {
+                            $('#submitBtn').removeClass('cursor-not-allowed');
+                            $("#submitBtn").html("Sign In");
+                            $("#alertDiv").html(
+                                `
+                                <div class="alert alert-custom alert-light-primary fade show mb-5" role="alert">
+                                    <div class="alert-icon"><i class="flaticon2-information"></i></div>
+                                    <div class="alert-text">
+                                        `+ response.msg +` <br>
+                                        Please try again or would you like to reset your password <a href="#"><strong>click here</strong></a>
+                                    </div>
+                                    <div class="alert-close">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true"><i class="ki ki-close"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                `
+                            );
+                        }
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                });
+                e.preventDefault();
+            });
+        </script>
+    </body>
+    <!--end::B

@@ -1,6 +1,9 @@
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.shortcuts import render
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 from datetime import datetime
@@ -10,6 +13,23 @@ from selectolax.lexbor import LexborHTMLParser
 from app.models import UnprocessUrls, Results, UrlsProcess, ResultsImages
 
 
+def sign_in(request):
+    if request.method == "POST":
+        user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'),
+                            request=request)
+
+        if user is not None and user.is_staff and user.is_active:
+            login(request, user)
+            request.session['user_id'] = user.id
+
+            return JsonResponse({'data': 'Success'})
+        else:
+            return JsonResponse({'msg': 'Invalid username and password.'})
+
+    return render(request, 'sign_in.html')
+
+
+@login_required
 def home(request):
     page = request.GET.get('page', 1)
     try:
@@ -21,6 +41,7 @@ def home(request):
         print(e)
 
 
+@login_required
 def view_listing(request, pk):
     results = Results.objects.filter(Q(id=pk) & ~Q(description=None)).first()
     context = {
@@ -30,6 +51,7 @@ def view_listing(request, pk):
     return render(request, 'view_listing.html', context)
 
 
+@login_required
 def unprocess_urls(request):
     try:
         urls = UnprocessUrls.objects.filter(scrape=0)
@@ -66,6 +88,7 @@ def unprocess_urls(request):
         print(e)
 
 
+@login_required
 def process_status(status):
     if status:
         if status.lower() == 'en vata':
@@ -76,6 +99,7 @@ def process_status(status):
         return None
 
 
+@login_required
 def process_urls(request):
     try:
         today = datetime.now()

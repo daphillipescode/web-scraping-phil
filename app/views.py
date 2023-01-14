@@ -52,6 +52,38 @@ def view_listing(request, pk):
 
 
 @login_required
+def edit_listing(request, pk):
+    if request.method == "POST":
+        Results.objects.filter(id=pk).update(
+            title=request.POST.get('title'),
+            description=request.POST.get('description'),
+            price=request.POST.get('price'),
+            baths=request.POST.get('baths'),
+            beds=request.POST.get('beds'),
+            sqft=request.POST.get('sqft'),
+            property_type=request.POST.get('property_type'),
+            type=request.POST.get('type'),
+            sub_type=request.POST.get('sub_type'),
+            style=request.POST.get('style'),
+            lot_size=request.POST.get('lot_size'),
+            lot_info=request.POST.get('lot_info'),
+            parking_info=request.POST.get('parking_info'),
+            postal_code=request.POST.get('postal_code'),
+            association_fee=request.POST.get('association_fee'),
+            phone=request.POST.get('phone'),
+            mls_number=request.POST.get('mls_number'),
+            status=request.POST.get('status'),
+        )
+
+        return JsonResponse({'data': 'success', 'msg': 'You have successfully edited the listing.'})
+    context = {
+        'data': Results.objects.filter(id=pk).first(),
+        'images': ResultsImages.objects.filter(result_id=pk)
+    }
+    return render(request, 'edit_listing.html', context)
+
+
+@login_required
 def unprocess_urls(request):
     try:
         urls = UnprocessUrls.objects.filter(scrape=0)

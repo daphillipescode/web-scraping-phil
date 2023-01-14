@@ -31,9 +31,19 @@
                 <i class="fas fa-phone"></i> {{ data.phone }}
             </button>
             {% endif %}
-            <a href="{{ data.url.url }}" class="btn btn-outline-danger btn-block btn-lg" target="_blank">
-                <i class="fas fa-link"></i> Original Listing
-            </a>
+            <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <a href="{{ data.url.url }}" class="btn btn-outline-danger btn-block btn-lg" target="_blank">
+                        <i class="fas fa-link"></i> Original Listing
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <a href="{% url 'edit_listing' data.id %}" class="btn btn-info btn-block btn-lg" target="_blank">
+                        <i class="fas fa-edit"></i> Edit Listing
+                    </a>
+                </div>
+            </div>
             <br>
             <ul class="nav nav-tabs nav-tabs-line">
                 <li class="nav-item">

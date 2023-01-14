@@ -1,10 +1,16 @@
 
 from cleantext import clean
 from django import template
+from django.template.defaultfilters import stringfilter
 
 from app.models import ResultsImages, Results
 
 register = template.Library()
+
+
+@register.filter
+def trim(value):
+    return value.strip()
 
 
 @register.simple_tag

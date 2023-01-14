@@ -1,7 +1,7 @@
 .idea
 media
 __pycache__
-settings.py
+main/settings.py
 *.pyc
 venv
 CACHE

@@ -1,0 +1,207 @@
+{% extends 'layout.html' %}
+{% load tags %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <form id="editForm">
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="float-right">
+                        <a href="{% url 'view_listing' data.id %}" class="btn btn-info" target="_blank">Preview Listing</a>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                    <br>
+                    <div class="form-group mb-3">
+                        <label>Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" value="{{ data.title }}" placeholder="Title" name="title" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Description <span class="text-danger">*</span></label>
+                        <textarea class="form-control" rows="15" placeholder="Description" name="description" required>{{ data.description }}</textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Price <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" value="{{ data.price }}" placeholder="Price" name="price" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group mb-3">
+                                <label>Baths</label>
+                                <input type="text" class="form-control" value="{{ data.baths }}" placeholder="Baths" name="baths">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group mb-3">
+                                <label>Beds</label>
+                                <input type="text" class="form-control" value="{{ data.beds }}" placeholder="Beds" name="beds">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group mb-3">
+                                <label>Sqft</label>
+                                <input type="text" class="form-control" value="{{ data.sqft }}" placeholder="Sqft" name="sqft">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group mb-3">
+                                <label>Property Type</label>
+                                <input type="text" class="form-control" value="{{ data.property_type }}" placeholder="Property Type" name="property_type">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group mb-3">
+                                <label>Type</label>
+                                <input type="text" class="form-control" value="{{ data.type }}" placeholder="Type" name="type">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group mb-3">
+                                <label>Sub Type</label>
+                                <input type="text" class="form-control" value="{{ data.sub_type }}" placeholder="Sub Type" name="subtype">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group mb-3">
+                                <label>Style</label>
+                                <input type="text" class="form-control" value="{{ data.style }}" placeholder="Style" name="style">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group mb-3">
+                                <label>Lot Size</label>
+                                <input type="text" class="form-control" value="{{ data.lot_size }}" placeholder="Lot Size" name="lot_size">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group mb-3">
+                                <label>Lot Info</label>
+                                <input type="text" class="form-control" value="{{ data.lot_info }}" placeholder="Lot Info" name="lot_info">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group mb-3">
+                                <label>Parking Info</label>
+                                <input type="text" class="form-control" value="{{ data.parking_info }}" placeholder="Parking Info" name="parking_info">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group mb-3">
+                                <label>Postal Code</label>
+                                <input type="text" class="form-control" value="{{ data.postal_code }}" placeholder="Postal Code" name="postal_code">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group mb-3">
+                                <label>Association Fee</label>
+                                <input type="text" class="form-control" value="{{ data.association_fee }}" placeholder="Association Fee" name="association_fee">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group mb-3">
+                                <label>Phone</label>
+                                <input type="text" class="form-control" value="{{ data.phone }}" placeholder="Phone" name="phone">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group mb-3">
+                                <label>MLS Number</label>
+                                <input type="text" class="form-control" value="{{ data.mls_number }}" placeholder="MLS Number" name="mls_number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Status <span class="text-danger">*</span></label>
+                        <select class="form-control" name="status" required>
+                            <option value="For Rent" {% if data.status == "For Rent" %}selected{% endif %}>For Rent</option>
+                            <option value="For Sale" {% if data.status == "For Sale" %}selected{% endif %}>For Sale</option>
+                        </select>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-custom alert-outline-info">
+                        <div class="alert-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="alert-text">Upload images on development phase.</div>
+                    </div>
+                    <form id="uploadForm">
+                    {% csrf_token %}
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </div>
+                    <br>
+                    <div class="form-group mb-3">
+                        <label>Upload Image (png, jpg, and gif)<span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" name="images" multiple required>
+                    </div>
+                    </form>
+                    <div class="row">
+                    {% for row in images %}
+                        <div class="col-lg-3 mb-3">
+                            <img src="{{ row.image }}" class="img-responsive object-fit" width="300px" height="200px">
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    $('#editForm').on('submit', function(e){
+        var form = new FormData(this);
+	    e.preventDefault();
+		Swal.fire({
+		    title: "Are you sure",
+		    text: "You want to edit this listing?",
+		    icon: "info",
+            iconColor: "#e73c1b",
+		    showCancelButton: true,
+		    confirmButtonText: "Yes",
+		    confirmButtonColor: "#e73c1b",
+		    allowOutsideClick: false,
+		    showLoaderOnConfirm: true,
+		    preConfirm: function (){
+                return $.ajax({
+                    data        : form,
+                    url         : '{% url "edit_listing" data.id %}',
+                    type        : 'POST',
+                    cache       : false,
+                    contentType : false,
+                    processData : false,
+                });
+		    },
+		}).then(function (response){
+            var response = response.value;
+		    if (response.data == "success"){
+                Swal.fire({
+                    title: "Good job!",
+                    html: response.msg,
+                    icon: "success",
+                });
+            }
+		});
+        e.preventDefault();
+    });
+</script>
+{% endblock %}
